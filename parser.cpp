@@ -3,7 +3,7 @@
 #include <string>
 #include <bitset>
 #include <cctype>
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -27,6 +27,8 @@ int main() {
 	ifstream File("RectL.asm");
 	ofstream OutputFile("RectL.hack");
 	
+	cout << "shut up";
+
 	while(getline(File, line)) {
 		OutputFile << "test" << '\n';
 	}
