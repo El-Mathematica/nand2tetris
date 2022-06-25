@@ -6,12 +6,25 @@
 #include <cctype>
 #include <bits/stdc++.h>
 
+#include "Parser.h"
+#include "Code.h"
+
 using namespace std;
 
 
 int main () {
 	cout << "test" << endl;
+
+
+	Parser parser;
+	parser.hasMoreCommands();
+
+	Code code;
+	code.testingCodeModule();
+
+
 	getchar();
+
 }
 
 
