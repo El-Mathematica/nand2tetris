@@ -12,15 +12,13 @@
 using namespace std;
 
 
-int main () {
-	cout << "test" << endl;
+int main (int argc, char* argv[]) {
+	
+	string filename(argv[1]);
+	Parser parser(filename);
+	
 
-
-	Parser parser;
-	parser.hasMoreCommands();
-
-	Code code;
-	code.testingCodeModule();
+	
 
 
 	getchar();
