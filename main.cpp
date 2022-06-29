@@ -16,8 +16,19 @@ int main (int argc, char* argv[]) {
 	
 	string filename(argv[1]);
 	Parser parser(filename);
+	while(parser.hasMoreCommands()) {
+		parser.advance();
+		if(parser.commandType() == Parser::CommandType::C_COMMAND) {
+			cout << "c command yes" << endl;
+		}
+		else if(parser.commandType() == Parser::CommandType::A_COMMAND) {
+			cout << "a command yes" << endl;
+		} else {
+			cout << "l command yes" << endl;
+		}
+		 
+	}
 	
-
 	
 
 
