@@ -5,6 +5,8 @@
 #include <fstream>
 #include <iostream>
 
+#include "Code.h"
+
 using namespace std;
 
 class Parser {
@@ -13,7 +15,7 @@ class Parser {
         enum CommandType{A_COMMAND, C_COMMAND, L_COMMAND};
         string currentCommand;
         ifstream file;
-
+        Code codeModule;
         Parser(string filename);
         
 

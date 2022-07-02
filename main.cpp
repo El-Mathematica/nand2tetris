@@ -20,6 +20,11 @@ int main (int argc, char* argv[]) {
 		parser.advance();
 		if(parser.commandType() == Parser::CommandType::C_COMMAND) {
 			cout << "c command yes" << endl;
+			parser.dest();
+			parser.comp();
+			parser.jump();
+
+			cout << parser.comp() << parser.dest() << parser.jump() << endl;
 		}
 		else if(parser.commandType() == Parser::CommandType::A_COMMAND) {
 			cout << "a command yes" << endl;

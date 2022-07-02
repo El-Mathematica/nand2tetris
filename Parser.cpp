@@ -52,3 +52,40 @@ enum Parser::CommandType Parser::commandType() {
         return A_COMMAND;
     }
 }
+
+string Parser::dest() {
+    if(currentCommand.find("=") != string::npos) {
+        string mnemonic = currentCommand.substr(0, currentCommand.find("="));
+        return codeModule.dest(mnemonic);
+    } else {
+        return "000";
+    }
+    
+}
+
+string Parser::comp() {
+    if(currentCommand.find("=") != string::npos && currentCommand.find(";") != string::npos) {
+        string mnemonic = currentCommand.substr(currentCommand.find("="), currentCommand.find(";") - currentCommand.find("="));
+
+        return codeModule.comp(mnemonic);
+    } else if(currentCommand.find("=") != string::npos) {
+        string mnemonic = currentCommand.substr(currentCommand.find("=") + 1);
+
+        return codeModule.comp(mnemonic);
+    } else if(currentCommand.find(";") != string::npos) {
+        string mnemonic = currentCommand.substr(0, currentCommand.find(";"));
+
+        return codeModule.comp(mnemonic);
+    }
+    
+} 
+
+string Parser::jump() {
+    if(currentCommand.find(";") != string::npos) {
+        string mnemonic = currentCommand.substr(currentCommand.find(";") + 1);
+        return codeModule.jump(mnemonic);
+        
+    } else {
+        return "000";
+    }
+}
