@@ -89,3 +89,8 @@ string Parser::jump() {
         return "000";
     }
 }
+
+string Parser::symbol() {
+    return currentCommand.substr(currentCommand.find("@") != string::npos);
+}
+

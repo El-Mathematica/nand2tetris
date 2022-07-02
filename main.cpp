@@ -4,30 +4,46 @@
 #include <string>
 #include <bitset>
 #include <cctype>
+#include <type_traits>
 #include <bits/stdc++.h>
 
 #include "Parser.h"
 #include "Code.h"
 
+
 using namespace std;
+
+bool is_number(const std::string& s);
+
 
 
 int main (int argc, char* argv[]) {
 	
 	string filename(argv[1]);
+	string fileNameWithoutExtension = filename.substr(0, filename.find("."));
+	cout << fileNameWithoutExtension << endl;
+	string newFileName = fileNameWithoutExtension + "test.hack";
+	ofstream outputFile(newFileName);
 	Parser parser(filename);
 	while(parser.hasMoreCommands()) {
 		parser.advance();
 		if(parser.commandType() == Parser::CommandType::C_COMMAND) {
-			cout << "c command yes" << endl;
 			parser.dest();
 			parser.comp();
 			parser.jump();
 
 			cout << parser.comp() << parser.dest() << parser.jump() << endl;
+
+			outputFile << parser.comp() + parser.dest() + parser.jump() << endl;
 		}
 		else if(parser.commandType() == Parser::CommandType::A_COMMAND) {
-			cout << "a command yes" << endl;
+			if(is_number(parser.symbol())) {
+				bitset<16> b(stoi(parser.symbol()));
+				cout << b << endl;
+				outputFile << b << endl;
+			}
+
+
 		} else {
 			cout << "l command yes" << endl;
 		}
@@ -35,11 +51,18 @@ int main (int argc, char* argv[]) {
 	}
 	
 	
-
+	outputFile.close();
 
 	getchar();
 
 }
+
+bool is_number(const std::string& s)
+{
+    return !s.empty() && std::find_if(s.begin(), 
+        s.end(), [](unsigned char c) { return !std::isdigit(c); }) == s.end();
+}
+
 
 
 /*
