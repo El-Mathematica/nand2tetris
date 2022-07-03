@@ -34,7 +34,7 @@ void Parser::advance() {
     //remove(line.begin(), line.end(), ' ');
 
     if(!(line.empty() || line.substr(0, 2) == "//" )) {
-        cout << line << endl;
+
         currentCommand = line;
     } else {
         advance();
