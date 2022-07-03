@@ -11,6 +11,9 @@ using namespace std;
 
 class Parser {
     public:
+
+        int ROMCounter = 0;
+        int RAMCounter = 16;
        
         enum CommandType{A_COMMAND, C_COMMAND, L_COMMAND};
         string currentCommand;

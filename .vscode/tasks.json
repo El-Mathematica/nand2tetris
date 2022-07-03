@@ -27,7 +27,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}", "${fileDirname}/Parser.cpp", "${fileDirname}/Code.cpp",
+                "${file}", "${fileDirname}/Parser.cpp", "${fileDirname}/Code.cpp", "${fileDirname}/SymbolTable.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],

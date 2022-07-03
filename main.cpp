@@ -9,6 +9,7 @@
 
 #include "Parser.h"
 #include "Code.h"
+#include "SymbolTable.h"
 
 
 using namespace std;
@@ -24,7 +25,20 @@ int main (int argc, char* argv[]) {
 	cout << fileNameWithoutExtension << endl;
 	string newFileName = fileNameWithoutExtension + "test.hack";
 	ofstream outputFile(newFileName);
+
+	Parser firstpass(filename);
+	while(firstpass.hasMoreCommands()) {
+		firstpass.advance();
+		if(firstpass.commandType() == Parser::CommandType::C_COMMAND || firstpass.commandType() == Parser::CommandType::A_COMMAND) {
+			firstpass.ROMCounter++;
+		}
+	}
+
+
+	
 	Parser parser(filename);
+
+
 	while(parser.hasMoreCommands()) {
 		parser.advance();
 		if(parser.commandType() == Parser::CommandType::C_COMMAND) {
