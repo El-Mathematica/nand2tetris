@@ -22,7 +22,7 @@ int main (int argc, char* argv[]) {
 	
 	string filename(argv[1]);
 	string fileNameWithoutExtension = filename.substr(0, filename.find("."));
-	cout << fileNameWithoutExtension << endl;
+
 	string newFileName = fileNameWithoutExtension + "test.hack";
 	ofstream outputFile(newFileName);
 	SymbolTable symbolTable;
@@ -36,7 +36,6 @@ int main (int argc, char* argv[]) {
 		} else if(firstpass.commandType() == Parser::CommandType::L_COMMAND) {
 			string symbol = firstpass.currentCommand.substr(firstpass.currentCommand.find("(") + 1, firstpass.currentCommand.find(")") - firstpass.currentCommand.find("(") - 1);
 			symbolTable.addEntry(symbol, firstpass.ROMCounter);
-			cout << "added " << symbol << "as ROM COUNTER ADDRESS" << firstpass.ROMCounter;
 		}
 	}
 
@@ -52,35 +51,30 @@ int main (int argc, char* argv[]) {
 			parser.comp();
 			parser.jump();
 
-			cout << parser.comp() << parser.dest() << parser.jump() << endl;
+
 
 			outputFile << parser.comp() + parser.dest() + parser.jump() << endl;
 		}
 		else if(parser.commandType() == Parser::CommandType::A_COMMAND) {
 			if(is_number(parser.symbol())) {
 				bitset<16> b(stoi(parser.symbol()));
-				cout << b << endl;
+
 				outputFile << b << endl;
-				cout << "number symbol " << parser.symbol() << endl;
 			} else {
 				if(symbolTable.contains(parser.symbol())) {
 					bitset<16> b(symbolTable.GetAddress(parser.symbol()));
-					cout << b << endl;
+
 					outputFile << b << endl;
-					cout << "known l command " << parser.symbol() << endl;
 				} else {
 					symbolTable.addEntry(parser.symbol(), parser.RAMCounter);
 					bitset<16> b(parser.RAMCounter);
-					cout << b << endl;
+
 					outputFile << b << endl;
 					parser.RAMCounter++;
-					cout << "unknown new symbol " << parser.symbol() << endl;
 				}
 			}
 
 
-		} else {
-			cout << "l command yes" << endl;
 		}
 		 
 	}
